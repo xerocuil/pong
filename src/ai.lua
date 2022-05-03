@@ -1,8 +1,9 @@
 AI = {}
 
 function AI:load()
-	self.width = 20
-	self.height = 100
+	self.img = love.graphics.newImage("assets/2.png")
+	self.width = self.img:getWidth()
+	self.height = self.img:getHeight()
 	self.speed = 500
 	self.x = love.graphics.getWidth() - self.width - 50
 	self.y = love.graphics.getHeight() / 2
@@ -45,5 +46,5 @@ function AI:checkBoundaries() -- Keep AI in-bounds
 end
 
 function AI:draw()
-	love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
+	love.graphics.draw(self.img, self.x, self.y)
 end
