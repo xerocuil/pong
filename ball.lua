@@ -9,6 +9,8 @@ function Ball:load()
 	self.speed = 200
 	self.xVel = -self.speed
 	self.yVel = 0
+	self.hitWall = love.audio.newSource("sounds/hitWall.wav", "static")
+	self.hitPlayer = love.audio.newSource("sounds/hitPlayer.wav", "static")
 end
 
 function Ball:update(dt)
@@ -27,9 +29,11 @@ function Ball:collideWall()
 	if self.y < 0 then
 		self.y = 0
 		self.yVel = -self.yVel
+		self.hitWall:play()
 	elseif self.y + self.height > love.graphics.getHeight() then
 		self.y = love.graphics.getHeight() - self.height
 		self.yVel = -self.yVel
+		self.hitWall:play()
 	end
 end
 
@@ -40,6 +44,8 @@ function Ball:collidePlayer()
 		local middlePlayer = Player.y + Player.height /2
 		local collisionPosition = middleBall - middlePlayer
 		self.yVel = collisionPosition * 5
+		self:increaseSpeed()
+		self.hitPlayer:play()
 	end
 end
 
@@ -50,7 +56,13 @@ function Ball:collideAI()
 		local middleAI = AI.y + AI.height /2
 		local collisionPosition = middleBall - middleAI
 		self.yVel = collisionPosition * 5
+		self:increaseSpeed()
+		self.hitPlayer:play()
 	end
+end
+
+function Ball:increaseSpeed()
+	self.speed = self.speed + 40
 end
 
 function Ball:score()
@@ -68,6 +80,7 @@ end
 function Ball:resetPosition(modifier)
 	self.x = love.graphics.getWidth() / 2 - self.width / 2
 	self.y = love.graphics.getHeight() / 2 - self.height / 2
+	self.speed = 200
 	self.yVel = 0
 	self.xVel = self.speed
 end

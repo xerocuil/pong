@@ -30,7 +30,7 @@ end
 function drawScore()
 	love.graphics.setFont(font)
 	love.graphics.print("Player: "..Score.player, 50, 50)
-	love.graphics.print("AI: "..Score.ai, 1000, 50)
+	love.graphics.print("CPU: "..Score.ai, love.graphics.getWidth() - 150, 50)
 end
 
 function checkCollision(a, b)
