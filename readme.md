@@ -1,9 +1,12 @@
 # Pong
 
-Creating my first game with Love2D & Lua.
+Pong clone created with LÖVE/Lua.
 
 ## To-Do
 
-- [ ] Add graphics
-- [ ] Add Sound FX
-- [ ] Add Scoreboad
+- [x] Add graphics
+- [x] Add Sound FX
+- [x] Add Music
+- [ ] Fullscreen Support
+- [x] Scoreboard
+- [ ] Two-Player mode
