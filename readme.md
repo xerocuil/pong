@@ -4,9 +4,10 @@ Pong clone created with LÖVE/Lua.
 
 ## To-Do
 
-- [x] Add graphics
-- [x] Add Sound FX
-- [x] Add Music
-- [ ] Fullscreen Support
+- [x] Graphics
+- [x] Sound effects
+- [x] Music
 - [x] Scoreboard
+- [ ] Full-screen Support
+- [ ] Menu
 - [ ] Two-Player mode
