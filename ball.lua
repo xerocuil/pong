@@ -1,5 +1,11 @@
-Ball = {}
+-- ## Set Variables
+local AI = require("ai")
+local Player = require("player")
 
+-- ## Init Ball
+local Ball = {}
+
+-- ## Load
 function Ball:load()
 	self.x = love.graphics.getWidth() / 2
 	self.y = love.graphics.getHeight() / 2
@@ -13,11 +19,13 @@ function Ball:load()
 	self.hitPlayer = love.audio.newSource("sounds/hitPlayer.wav", "static")
 end
 
+-- ## Update
 function Ball:update(dt)
 	self:move(dt)
 	self:collide(dt)
 end
 
+-- ## Collision Detection
 function Ball:collide()
 	self:collideWall()
 	self:collidePlayer()
@@ -25,6 +33,7 @@ function Ball:collide()
 	self:score()
 end
 
+--- Wall
 function Ball:collideWall()
 	if self.y < 0 then
 		self.y = 0
@@ -37,6 +46,8 @@ function Ball:collideWall()
 	end
 end
 
+
+--- Player
 function Ball:collidePlayer()
 	if checkCollision(self, Player) then
 		self.xVel = self.speed
@@ -49,6 +60,7 @@ function Ball:collidePlayer()
 	end
 end
 
+--- AI
 function Ball:collideAI()
 	if checkCollision(self, AI) then
 		self.xVel = -self.speed
@@ -61,10 +73,31 @@ function Ball:collideAI()
 	end
 end
 
-function Ball:increaseSpeed()
-	self.speed = self.speed + 40
+
+
+--- Draw
+function Ball:draw()
+	love.graphics.draw(self.img, self.x, self.y)
 end
 
+--- Functions
+
+--- Movement
+function Ball:move(dt)
+	self.x = self.x + self.xVel * dt
+	self.y = self.y + self.yVel * dt
+end
+
+--- Reset
+function Ball:resetPosition(modifier)
+	self.x = love.graphics.getWidth() / 2 - self.width / 2
+	self.y = love.graphics.getHeight() / 2 - self.height / 2
+	self.speed = 200
+	self.yVel = 0
+	self.xVel = self.speed
+end
+
+--- Score
 function Ball:score()
 	if self.x < 0 then
 		self:resetPosition(1)
@@ -77,19 +110,9 @@ function Ball:score()
 	end
 end
 
-function Ball:resetPosition(modifier)
-	self.x = love.graphics.getWidth() / 2 - self.width / 2
-	self.y = love.graphics.getHeight() / 2 - self.height / 2
-	self.speed = 200
-	self.yVel = 0
-	self.xVel = self.speed
+--- Speed
+function Ball:increaseSpeed()
+	self.speed = self.speed + 40
 end
 
-function Ball:move(dt)
-	self.x = self.x + self.xVel * dt
-	self.y = self.y + self.yVel * dt
-end
-
-function Ball:draw()
-	love.graphics.draw(self.img, self.x, self.y)
-end
+return Ball

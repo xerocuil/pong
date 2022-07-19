@@ -1,5 +1,24 @@
-Player = {}
+-- ## Set Filter
+love.graphics.setDefaultFilter("nearest", "nearest")
 
+-- ## Set Variables
+local Controls = require("lib/baton")
+
+-- ## Input Config
+local Input = Controls.new {
+  controls = {
+    up = {'key:up', 'axis:lefty-', 'button:dpup'},
+    down = {'key:down', 'axis:lefty+', 'button:dpdown'},
+    exit = {'key:escape', 'button:back'}
+  },
+  joystick = love.joystick.getJoysticks()[1],
+  deadzone = .33,
+}
+
+-- ## Init Player
+local Player = {}
+
+-- ## Load
 function Player:load()
 	self.x = 50
 	self.y = love.graphics.getHeight() / 2
@@ -10,19 +29,21 @@ function Player:load()
 	self.speed = 500
 end
 
+-- ## Update
 function Player:update(dt)
 	self:move(dt)
+	self:exitGame()
 	self:checkBoundaries()
+	Input:update()
 end
 
-function Player:move(dt) -- Player movement
-	if love.keyboard.isDown("w") then
-		self.y = self.y - self.speed * dt
-	elseif love.keyboard.isDown("s") then
-		self.y = self.y + self.speed * dt
-	end
+-- ## Draw
+function Player:draw()
+	love.graphics.draw(self.img, self.x, self.y)
 end
 
+-- ## Functions
+--- Check Boundaries
 function Player:checkBoundaries() -- Keep Player in-bounds
 	if self.y < 0 then --- Stop player at top
 		self.y = 0
@@ -31,6 +52,21 @@ function Player:checkBoundaries() -- Keep Player in-bounds
 	end
 end
 
-function Player:draw()
-	love.graphics.draw(self.img, self.x, self.y)
+-- ### Player Input
+--- Player Movement
+function Player:move(dt)
+	if Input:down 'up' then
+		self.y = self.y - self.speed * dt
+	elseif Input:down 'down' then
+		self.y = self.y + self.speed * dt
+	end
 end
+
+--- Exit
+function Player:exitGame()
+  if Input:down 'exit' then
+    love.event.push('quit')
+  end
+end
+
+return Player
