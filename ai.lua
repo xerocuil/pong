@@ -1,4 +1,4 @@
-AI = {}
+local AI = {}
 
 function AI:load()
 	self.img = love.graphics.newImage("assets/2.png")
@@ -17,24 +17,10 @@ function AI:update(dt)
 	self:checkBoundaries()
 	self:move(dt)
 	self.timer = self.timer + dt
-	if self.timer > self.rate then
-		self.timer = 0
-		self:acquireTarget()
-	end
 end
 
 function AI:move(dt)
 	self.y = self.y +self.yVel * dt
-end
-
-function AI:acquireTarget()
-	if Ball.y + Ball.height < self.y then
-		self.yVel = -self.speed
-	elseif Ball.y > self.y + self.height then
-		self.yVel = self.speed
-	else
-		self.yVel = 0
-	end
 end
 
 function AI:checkBoundaries() -- Keep AI in-bounds
@@ -48,3 +34,5 @@ end
 function AI:draw()
 	love.graphics.draw(self.img, self.x, self.y)
 end
+
+return AI
