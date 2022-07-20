@@ -2,7 +2,7 @@
 love.graphics.setDefaultFilter("nearest", "nearest")
 
 -- ## Set Variables
-local Controls = require("lib/baton")
+local Controls = require 'lib/baton'
 
 -- ## Input Config
 local Input = Controls.new {

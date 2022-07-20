@@ -2,11 +2,11 @@
 love.graphics.setDefaultFilter("nearest", "nearest")
 
 -- ## Set Variables
-local AI = require("ai")
-local Background = require("background")
-local Ball = require("ball")
-local Player = require("player")
-local Settings = require("settings")
+local AI = require 'ai'
+local Background = require 'background'
+local Ball = require 'ball'
+local Player = require 'player'
+local Settings = require 'settings'
 
 game_state = "title"
 game_winner = ""
@@ -18,7 +18,8 @@ function love.load()
 	Ball:load()
 	Player:load()
 	Score = {player = 0, ai = 0}
-	font = love.graphics.newFont(30)
+	font = love.graphics.newFont(32)
+	titleFont = love.graphics.newFont(64)
 end
 
 -- ## Update
@@ -56,14 +57,19 @@ end
 -- ## Functions
 --- Title Screen
 function titleScreen()
+	love.graphics.setFont(titleFont)
+	love.graphics.printf("Pong", 0, 200, love.graphics.getWidth(), "center")
 	love.graphics.setFont(font)
-	love.graphics.print("Pong")
+	love.graphics.printf("Press Start to begin", 0, 400, love.graphics.getWidth(), "center")
 end
 
 --- Game Over
 function gameOverScreen()
+	love.graphics.setFont(titleFont)
+	love.graphics.printf("Game Over", 0, 200, love.graphics.getWidth(), "center")
 	love.graphics.setFont(font)
-	love.graphics.print("Game Over\n" .. game_winner .. " Wins")
+	love.graphics.printf("Press Start to restart", 0, 400, love.graphics.getWidth(), "center")
+	Score = {player = 0, ai = 0}
 end
 
 --- Scoreboard

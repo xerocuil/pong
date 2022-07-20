@@ -1,5 +1,5 @@
 -- ## Set Variables
-local Settings = require("settings")
+local Settings = require 'settings'
 
 local AI = {}
 
