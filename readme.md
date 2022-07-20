@@ -12,7 +12,7 @@ Pong clone created with LÖVE/Lua.
 
 - [x] Graphics
 - [x] Sound effects
-- [x] Music
+- [ ] Music
 - [x] Scoreboard
 - [ ] Full-screen Support
 - [ ] Menu
