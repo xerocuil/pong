@@ -9,6 +9,7 @@ local Input = Controls.new {
   controls = {
     up = {'key:up', 'axis:lefty-', 'button:dpup'},
     down = {'key:down', 'axis:lefty+', 'button:dpdown'},
+    select = {'key:space', 'button:a'},
     exit = {'key:escape', 'button:back'}
   },
   joystick = love.joystick.getJoysticks()[1],
@@ -32,6 +33,7 @@ end
 -- ## Update
 function Player:update(dt)
 	self:move(dt)
+	self:start(dt)
 	self:exitGame()
 	self:checkBoundaries()
 	Input:update()
@@ -59,6 +61,13 @@ function Player:move(dt)
 		self.y = self.y - self.speed * dt
 	elseif Input:down 'down' then
 		self.y = self.y + self.speed * dt
+	end
+end
+
+--- Menu
+function Player:start(dt)
+	if Input:down 'select' then
+		game_state = "game"
 	end
 end
 

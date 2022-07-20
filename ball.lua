@@ -1,6 +1,7 @@
 -- ## Set Variables
 local AI = require("ai")
 local Player = require("player")
+local Settings = require("settings")
 
 -- ## Init Ball
 local Ball = {}
@@ -12,7 +13,8 @@ function Ball:load()
 	self.img = love.graphics.newImage("assets/ball.png")
 	self.width = self.img:getWidth()
 	self.height = self.img:getHeight()
-	self.speed = 200
+	self.default_speed = 200 * Settings.difficulty
+	self.speed = self.default_speed
 	self.xVel = -self.speed
 	self.yVel = 0
 	self.hitWall = love.audio.newSource("sounds/hitWall.wav", "static")
@@ -73,14 +75,12 @@ function Ball:collideAI()
 	end
 end
 
-
-
---- Draw
+-- ## Draw
 function Ball:draw()
 	love.graphics.draw(self.img, self.x, self.y)
 end
 
---- Functions
+-- ## Functions
 
 --- Movement
 function Ball:move(dt)
@@ -92,7 +92,7 @@ end
 function Ball:resetPosition(modifier)
 	self.x = love.graphics.getWidth() / 2 - self.width / 2
 	self.y = love.graphics.getHeight() / 2 - self.height / 2
-	self.speed = 200
+	self.speed = self.default_speed
 	self.yVel = 0
 	self.xVel = self.speed
 end
@@ -112,7 +112,7 @@ end
 
 --- Speed
 function Ball:increaseSpeed()
-	self.speed = self.speed + 40
+	self.speed = self.speed + (40 * Settings.difficulty)
 end
 
 return Ball

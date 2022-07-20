@@ -1,16 +1,18 @@
+-- ## Set Variables
+local Settings = require("settings")
+
 local AI = {}
 
 function AI:load()
 	self.img = love.graphics.newImage("assets/2.png")
 	self.width = self.img:getWidth()
 	self.height = self.img:getHeight()
-	self.speed = 500
 	self.x = love.graphics.getWidth() - self.width - 50
 	self.y = love.graphics.getHeight() / 2
 	self.yVel = 0
-	self.speed = 500
+	self.speed = 500 * (((Settings.difficulty - 1) / 10) + 1)
 	self.timer = 0
-	self.rate = 0.5
+	self.rate = 0.5 / Settings.difficulty
 end
 
 function AI:update(dt)

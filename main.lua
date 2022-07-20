@@ -6,6 +6,10 @@ local AI = require("ai")
 local Background = require("background")
 local Ball = require("ball")
 local Player = require("player")
+local Settings = require("settings")
+
+game_state = "title"
+game_winner = ""
 
 -- ## Load
 function love.load()
@@ -23,6 +27,9 @@ function love.update(dt)
 	Ball:update(dt)
 	AI:update(dt)
 	Background:update(dt)
+
+	checkScore()
+
 	if AI.timer > AI.rate then
 		AI.timer = 0
 		acquireTarget()
@@ -31,19 +38,49 @@ end
 
 -- ## Draw
 function love.draw()
-	Background:draw() -- Draw background first to not cover up sprites.
-	Player:draw()
-	Ball:draw()
-	AI:draw()
-	drawScore()
+	if game_state == "title" then
+		Background:draw()
+		titleScreen()
+	elseif game_state == "game" then
+		Background:draw() -- Draw background first to not cover up sprites.
+		Player:draw()
+		Ball:draw()
+		AI:draw()
+		drawScore()
+	elseif game_state == "game_over" then
+		Background:draw()
+		gameOverScreen()
+	end
 end
 
 -- ## Functions
+--- Title Screen
+function titleScreen()
+	love.graphics.setFont(font)
+	love.graphics.print("Pong")
+end
+
+--- Game Over
+function gameOverScreen()
+	love.graphics.setFont(font)
+	love.graphics.print("Game Over\n" .. game_winner .. " Wins")
+end
+
 --- Scoreboard
 function drawScore()
 	love.graphics.setFont(font)
 	love.graphics.print("Player: "..Score.player, 50, 50)
 	love.graphics.print("CPU: "..Score.ai, love.graphics.getWidth() - 150, 50)
+end
+
+function checkScore()
+	if Score.player == Settings.match_win then
+		game_winner = "Player"
+		game_state = "game_over"
+	elseif Score.ai == Settings.match_win then
+		game_winner = "CPU"
+		game_state = "game_over"
+	end
 end
 
 --- AI Acquire Target
