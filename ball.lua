@@ -1,7 +1,7 @@
 -- ## Set Variables
-local AI = require("ai")
-local Player = require("player")
-local Settings = require("settings")
+local AI = require 'ai'
+local Player = require 'player'
+local Settings = require 'settings'
 
 -- ## Init Ball
 local Ball = {}
@@ -47,7 +47,6 @@ function Ball:collideWall()
 		self.hitWall:play()
 	end
 end
-
 
 --- Player
 function Ball:collidePlayer()
