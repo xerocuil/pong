@@ -18,11 +18,12 @@ local Input = Controls.new {
 
 -- ## Init Player
 local Player = {}
+Player = {default_x = 50, default_y = love.graphics.getHeight() / 2}
 
 -- ## Load
 function Player:load()
-	self.x = 50
-	self.y = love.graphics.getHeight() / 2
+	self.x = self.default_x
+	self.y = self.default_y
 	self.img = love.graphics.newImage("assets/1.png")
 	self.width = self.img:getWidth()
 	self.height = self.img:getHeight()
@@ -67,7 +68,7 @@ end
 --- Menu
 function Player:start(dt)
 	if Input:down 'select' then
-		game_state = "game"
+		Game.state = "game"
 	end
 end
 

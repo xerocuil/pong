@@ -5,7 +5,6 @@ local Settings = require 'settings'
 
 -- ## Init Ball
 local Ball = {}
-
 -- ## Load
 function Ball:load()
 	self.x = love.graphics.getWidth() / 2
@@ -27,7 +26,13 @@ function Ball:update(dt)
 	self:collide(dt)
 end
 
--- ## Collision Detection
+-- ## Draw
+function Ball:draw()
+	love.graphics.draw(self.img, self.x, self.y)
+end
+
+-- ## Functions
+-- ### Collision Detection
 function Ball:collide()
 	self:collideWall()
 	self:collidePlayer()
@@ -73,13 +78,6 @@ function Ball:collideAI()
 		self.hitPlayer:play()
 	end
 end
-
--- ## Draw
-function Ball:draw()
-	love.graphics.draw(self.img, self.x, self.y)
-end
-
--- ## Functions
 
 --- Movement
 function Ball:move(dt)
