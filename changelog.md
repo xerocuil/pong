@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.2.1] - Unreleased
+
+### Added
+- Pause screen
+- Scaling
+- Fullscreen toggle
+- Reset game at game over screen
+- Game icon
+
+### Changed
+- Control class moved from Player to Global
+
 ## [0.2.0] - 2022.0720.0049
 
 ### Added

@@ -3,15 +3,15 @@ local AI = require 'ai'
 local Player = require 'player'
 local Settings = require 'settings'
 
--- ## Init Ball
+-- ## Init/Load Ball
 local Ball = {}
--- ## Load
+
 function Ball:load()
 	self.x = love.graphics.getWidth() / 2
 	self.y = love.graphics.getHeight() / 2
 	self.img = love.graphics.newImage("assets/ball.png")
-	self.width = self.img:getWidth()
-	self.height = self.img:getHeight()
+	self.width = self.img:getWidth() * SCALE
+	self.height = self.img:getHeight() * SCALE
 	self.default_speed = 200 * Settings.difficulty
 	self.speed = self.default_speed
 	self.xVel = -self.speed
@@ -28,11 +28,11 @@ end
 
 -- ## Draw
 function Ball:draw()
-	love.graphics.draw(self.img, self.x, self.y)
+	love.graphics.draw(self.img, self.x, self.y, 0, SCALE, SCALE)
 end
 
 -- ## Functions
--- ### Collision Detection
+--- ### Collision Detection
 function Ball:collide()
 	self:collideWall()
 	self:collidePlayer()
@@ -79,13 +79,13 @@ function Ball:collideAI()
 	end
 end
 
---- Movement
+-- Movement
 function Ball:move(dt)
 	self.x = self.x + self.xVel * dt
 	self.y = self.y + self.yVel * dt
 end
 
---- Reset
+-- Reset
 function Ball:resetPosition(modifier)
 	self.x = love.graphics.getWidth() / 2 - self.width / 2
 	self.y = love.graphics.getHeight() / 2 - self.height / 2
@@ -94,22 +94,22 @@ function Ball:resetPosition(modifier)
 	self.xVel = self.speed
 end
 
---- Score
+-- Score
 function Ball:score()
 	if self.x < 0 then
 		self:resetPosition(1)
-		Score.ai = Score.ai + 1
+		Game.score.ai = Game.score.ai + 1
 	end
 
 	if self.x + self.width > love.graphics.getWidth() then
 		self:resetPosition(-1)
-		Score.player = Score.player + 1
+		Game.score.player = Game.score.player + 1
 	end
 end
 
 --- Speed
 function Ball:increaseSpeed()
-	self.speed = self.speed + (40 * Settings.difficulty)
+	self.speed = self.speed + (20 * Settings.difficulty)
 end
 
 return Ball

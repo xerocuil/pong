@@ -14,6 +14,6 @@ Pong clone created with LÖVE/Lua.
 - [x] Sound effects
 - [ ] Music
 - [x] Scoreboard
-- [ ] Full-screen Support
+- [x] Full-screen Support
 - [ ] Menu
 - [ ] Two-Player mode
