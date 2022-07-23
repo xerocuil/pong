@@ -1,17 +1,19 @@
 -- ## Set Variables
 local Settings = require 'settings'
 
+-- ## Init/Load AI
 local AI = {}
-
-AI.timer = 0
-AI.rate = 0.5 / Settings.difficulty
 
 function AI:load()
 	self.img = love.graphics.newImage("assets/2.png")
-	self.width = self.img:getWidth()
-	self.height = self.img:getHeight()
-	self.x = love.graphics.getWidth() - self.width - 50
-	self.y = love.graphics.getHeight() / 2
+	self.width = self.img:getWidth() * SCALE
+	self.height = self.img:getHeight() * SCALE
+	self.default_x = love.graphics.getWidth() - self.width - 50
+	self.default_y = love.graphics.getHeight() / 2
+	self.x = self.default_x
+	self.y = self.default_y
+	self.timer = 0
+	self.rate = 0.5 / Settings.difficulty
 	self.yVel = 0
 	self.speed = 500 * (((Settings.difficulty - 1) / 10) + 1)
 end
@@ -35,7 +37,7 @@ function AI:checkBoundaries() -- Keep AI in-bounds
 end
 
 function AI:draw()
-	love.graphics.draw(self.img, self.x, self.y)
+	love.graphics.draw(self.img, self.x, self.y, 0, SCALE, SCALE)
 end
 
 return AI
