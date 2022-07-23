@@ -8,11 +8,11 @@ Pong clone created with LÖVE/Lua.
 
 Keyboard | Joystick | Command
 :------- | :------- | :------
-`W`/`S` or `UP`/`DOWN` | `UP`/`DOWN` | Move Paddle
-`ENTER` | `START` | Start/Pause Game
-`F11` | `Y` | Toggle Fullscreen
+W/S or UP/DOWN | UP/DOWN | Move Paddle
+ENTER | START | Start/Pause Game
+F11 | Y | Toggle Fullscreen
 
-## Latest Release [v0.2.0]
+## Latest Release [v0.2.1]
 
 - [Linux (AppImage)](https://github.com/xerocuil/pong/releases/download/v0.2.1/pong-v0.2.1-linux.AppImage)
 - [Linux (tar.gz)](https://github.com/xerocuil/pong/releases/download/v0.2.1/pong-v0.2.1-linux.tar.gz)
