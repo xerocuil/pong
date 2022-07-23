@@ -14,9 +14,9 @@ Keyboard | Joystick | Command
 
 ## Latest Release [v0.2.0]
 
-- [Linux (AppImage)](https://github.com/xerocuil/pong/releases/download/v0.2.0/pong-v0.2.1-linux.AppImage)
-- [Linux (tar.gz)](https://github.com/xerocuil/pong/releases/download/v0.2.0/pong-v0.2.1-linux.tar.gz)
-- [Windows (64-Bit)](https://github.com/xerocuil/pong/releases/download/v0.2.0/pong-v0.2.1-win.zip)
+- [Linux (AppImage)](https://github.com/xerocuil/pong/releases/download/v0.2.1/pong-v0.2.1-linux.AppImage)
+- [Linux (tar.gz)](https://github.com/xerocuil/pong/releases/download/v0.2.1/pong-v0.2.1-linux.tar.gz)
+- [Windows (64-Bit)](https://github.com/xerocuil/pong/releases/download/v0.2.1/pong-v0.2.1-win.zip)
 
 ## To-Do
 
