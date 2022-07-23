@@ -9,10 +9,9 @@ Input = Controls.new {
     up = {'key:up', 'axis:lefty-', 'button:dpup'},
     down = {'key:down', 'axis:lefty+', 'button:dpdown'},
     select = {'key:space', 'button:a'},
-    restart = {'key:r', 'button:y'},
     start = {'key:return', 'button:start'},
     exit = {'key:escape', 'button:back'},
-    fullscreen = {'key:f'}
+    fullscreen = {'key:f11', 'button:y'}
   },
   joystick = love.joystick.getJoysticks()[1],
   deadzone = .33,
@@ -31,7 +30,6 @@ local AI = require 'ai'
 local Background = require 'background'
 local Ball = require 'ball'
 local Menu = require 'menu'
-local Stage = require 'stage'
 local Player = require 'player'
 local Settings = require 'settings'
 
