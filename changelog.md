@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.2.1] - Unreleased
+## [0.2.1] - 2022.0722.2211
 
 ### Added
 - Pause screen
@@ -11,6 +11,7 @@
 
 ### Changed
 - Control class moved from Player to Global
+- Menu class for Pause, Title, and Game Over states.
 
 ## [0.2.0] - 2022.0720.0049
 
