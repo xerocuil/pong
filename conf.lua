@@ -1,5 +1,5 @@
 TITLE = "Pong"
-DEBUG = true
+DEBUG = false
 BASE_WIDTH = 640
 BASE_HEIGHT = 360
 SCALE = 2
