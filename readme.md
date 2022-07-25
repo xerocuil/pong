@@ -1,29 +1,28 @@
 # Pong
 
-![Pong](assets/screenshot.jpg)
+![Pong](docs/screenshot.jpg)
 
 Pong clone created with LÖVE/Lua.
 
+
 ## Controls
 
-Keyboard | Joystick | Command
-:------- | :------- | :------
-W/S or UP/DOWN | UP/DOWN | Move Paddle
-ENTER | START | Start/Pause Game
-F11 | Y | Toggle Fullscreen
+Command           | Keyboard                            | Joystick
+:------           | :-------                            | :-------
+Move Paddle       | 1P: `W` / `S`<br/>2P: `UP` / `DOWN` | `D-PAD` or `L STICK`
+1 Player Game     | `1`                                 | `A`
+2 Player Game     | `2`                                 | `X`
+Pause             | `ENTER`                             | `START`
+Toggle Fullscreen | `F11`                               | `Y`
+Exit Match/Game   | `ESC`                               | `BACK`
 
-## Latest Release [v0.2.1]
 
-- [Linux (AppImage)](https://github.com/xerocuil/pong/releases/download/v0.2.1/pong-v0.2.1-linux.AppImage)
-- [Linux (tar.gz)](https://github.com/xerocuil/pong/releases/download/v0.2.1/pong-v0.2.1-linux.tar.gz)
-- [Windows (64-Bit)](https://github.com/xerocuil/pong/releases/download/v0.2.1/pong-v0.2.1-win.zip)
+## Latest Release [v0.3.0]
 
-## To-Do
+- [Linux (AppImage)](https://github.com/xerocuil/pong/releases/download/v0.3.0/pong-v0.3.0-linux.AppImage)
+- [Linux (tar.gz)](https://github.com/xerocuil/pong/releases/download/v0.3.0/pong-v0.3.0-linux.tar.gz)
+- [Windows (64-Bit)](https://github.com/xerocuil/pong/releases/download/v0.3.0/pong-v0.3.0-win.zip)
 
-- [ ] Menu
-- [ ] Music
-- [ ] Two-Player mode
-- [x] Full-screen Support
-- [x] Graphics
-- [x] Scoreboard
-- [x] Sound effects
+---
+
+[Homepage](https://github.com/xerocuil/pong) | [Changelog](changelog.md)

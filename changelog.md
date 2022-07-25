@@ -1,8 +1,38 @@
 # Changelog
 
-## [0.2.1] - 2022.0722.2211
+## To-Do
+
+- [ ] Menu
+- [ ] Music
+- [ ] Update Graphics
+- [ ] Update Score format
+- [ ] Update font
+- [ ] Create State Class
+- [ ] Optimize AI
+
+
+## [0.3.0] - 2022.0724
 
 ### Added
+
+- Two-player mode
+
+### Changed
+
+- Moved Player,AI classes to Player table
+- Moved A.I, collision detection, player movement, scoring to main
+- Modified Menu, Debug GUI
+
+### Fixed
+
+- Ball reset serve direction
+- resetGame() now includes Ball position
+
+
+## [0.2.1] - 2022.0722
+
+### Added
+
 - Pause screen
 - Scaling
 - Fullscreen toggle
@@ -10,31 +40,37 @@
 - Game icon
 
 ### Changed
-- Control class moved from Player to Global
-- Menu class for Pause, Title, and Game Over states.
 
-## [0.2.0] - 2022.0720.0049
+- Control class moved from Player to Global
+- Menu class for Pause, Title, and Game Over states
+
+
+## [0.2.0] - 2022.0720
 
 ### Added
+
 - Title Screen
 - Game Over Screen
 - Game Settings
 	+ A.I. difficulty
-	+ # Rounds to win
+	+ No. rounds to win
 
-## [0.1.0] - 2022.0504.1303
+## [0.1.0] - 2022.0504
 
 ### Added
+
 - Increased ball speed with each player collision
 - Scoreboard
 - Collision sound effects
 
 ### Changed
+
 - Player, background sprites
 
 ## [0.0.1] - Init commit
 
 ### Added
+
 - Player, ball, background elements
 
 
