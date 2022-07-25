@@ -1,15 +1,16 @@
+Controls = require 'lib/baton'
+
 --## Init/Load Menu
 local Menu = {}
 
-BTN_HEIGHT = 64
-local title_height = love.graphics.getHeight() * 0.15
-local menu_height = love.graphics.getHeight() * 0.40
 menu_selection = 0
-local function hide_mouse() love.mouse.setVisible(false) end
-local function show_mouse() love.mouse.setVisible(true) end
+
+local btn_height = 64
+local title_height = love.graphics.getHeight() * 0.15
+local menu_height = love.graphics.getHeight() * 0.50
 
 -- ## Load
-function Menu:loadTitle()
+function Menu:load()
   self:load_button(
     "1 Player Game",
     function()
@@ -39,10 +40,10 @@ end
 
 
 -- ## Draw
-function Menu:drawTitle()
+function Menu:draw()
   local btn_width = W_WIDTH * 0.4
   local margin = 16
-  local menu_height = (BTN_HEIGHT + margin) * #Menu
+  local menu_height = (btn_height + margin) * #Menu
   local cursor_y = 0
 
   local color_white = {1.0, 1.0, 1.0, 1.0}
@@ -61,13 +62,11 @@ function Menu:drawTitle()
     local btn_x = (W_WIDTH * 0.5) - (btn_width * 0.5)
     local btn_y = (W_HEIGHT * 0.5) - (menu_height * 0.5) + cursor_y
     btn.x = (W_WIDTH * 0.5)
-    btn.y = (W_HEIGHT * 0.5) - (menu_height * 0.5) + cursor_y + (BTN_HEIGHT * 0.5)
+    btn.y = (W_HEIGHT * 0.5) - (menu_height * 0.5) + cursor_y + (btn_height * 0.5)
     local mouse_x, mouse_y = love.mouse.getPosition()
 
-
-
     local hot = mouse_x > btn_x and mouse_x < btn_x + btn_width and
-                mouse_y > btn_y and mouse_y < btn_y + BTN_HEIGHT
+                mouse_y > btn_y and mouse_y < btn_y + btn_height
 
     if hot then
       love.graphics.setColor(unpack(color_highlight))
@@ -89,7 +88,7 @@ function Menu:drawTitle()
       btn_x,
       btn_y,
       btn_width,
-      BTN_HEIGHT
+      btn_height
     )
 
     local text_width = font:getWidth(btn.text)
@@ -103,7 +102,7 @@ function Menu:drawTitle()
       btn_y + (text_height * 0.5)
     )
 
-    cursor_y = cursor_y + (BTN_HEIGHT + margin)
+    cursor_y = cursor_y + (btn_height + margin)
   end
 end
 
