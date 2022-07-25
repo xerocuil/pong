@@ -19,9 +19,10 @@ Exit Match/Game   | `ESC`                               | `BACK`
 
 ## Latest Release [v0.3.0]
 
-- [Linux (AppImage)](https://github.com/xerocuil/pong/releases/download/v0.3.0/pong-v0.3.0-linux.AppImage)
-- [Linux (tar.gz)](https://github.com/xerocuil/pong/releases/download/v0.3.0/pong-v0.3.0-linux.tar.gz)
-- [Windows (64-Bit)](https://github.com/xerocuil/pong/releases/download/v0.3.0/pong-v0.3.0-win.zip)
+- [Linux (tar)](https://github.com/xerocuil/pong/releases/download/v0.3.0/pong-v0.3.0-linux.tar.gz)
+- [Windows (64-Bit/zip)](https://github.com/xerocuil/pong/releases/download/v0.3.0/pong-v0.3.0-win.zip)
+- [AppImage](https://github.com/xerocuil/pong/releases/download/v0.3.0/pong-v0.3.0-linux.AppImage)
+- [LÖVE](https://github.com/xerocuil/pong/releases/download/v0.3.0/pong-v0.3.0.love)
 
 ---
 
