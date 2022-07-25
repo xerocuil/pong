@@ -5,6 +5,8 @@ love.graphics.setDefaultFilter("nearest", "nearest")
 -- ## Set Libraries
 Controls = require 'lib/baton'
 
+function hide_mouse() love.mouse.setVisible(false) end
+function show_mouse() love.mouse.setVisible(true) end
 
 -- ## Load Player Controls
 Player1Input = Controls.new {
@@ -71,7 +73,7 @@ function love.load()
   titleFont = love.graphics.newFont('assets/digital-disco.ttf', 64 * SCALE)
   Background:load()
   Ball:load()
-  Menu:loadTitle()
+  Menu:load()
 end
 
 
@@ -111,7 +113,7 @@ function love.draw()
   printDebug()
   if Game.state == "title" then
     Background:draw()
-    Menu:drawTitle()
+    Menu:draw()
   elseif Game.state == "game" then
     Background:draw() -- Draw background first to not cover up sprites.
     Ball:draw()
@@ -398,25 +400,21 @@ function printDebug()
     loveversion = string.format("%02d.%02d.%02d", love._version_major, love._version_minor, love._version_revision)
     local getPositionX, getPositionY = love.mouse.getPosition()
 
-    print("\n\n## DEBUG (main.lua\n")
+    print("\n## DEBUG (main.lua)\n")
+    print("### Menu")
+    print("menu_selection: "..menu_selection)
+    print("---")
     print("### Game")
-    print(".type: "..Game.type)
-    print(".score.player1: "..Game.score.player1)
-    print(".score.player2: "..Game.score.player2)
-    print(".winner: "..Game.winner)
+    print("type: "..Game.type..", score.player1: "..Game.score.player1..", score.player2: "..Game.score.player2)
     print("---")
     print("### Player")
-    print(".name: "..Player1.name.."  .type: "..Player1.type.."  .color: "..Player1.color)
-    print(".name: "..Player2.name.."  .type: "..Player2.type.."  .color: "..Player2.color)
+    print("name: "..Player1.name..", type: "..Player1.type..", color: "..Player1.color)
+    print("name: "..Player2.name..", type: "..Player2.type..", color: "..Player2.color)
     print("---")
     print("### System")
     print("LÖVE Version: "..loveversion)
-    print("SCALE: "..SCALE)
-    print("W_WIDTH: "..W_WIDTH)
-    print("W_HEIGHT: "..W_HEIGHT)
-    print("getPositionX: "..getPositionX)
-    print("getPositionY: "..getPositionY)
-    print("menu_selection: "..menu_selection)
+    print("DIMENSIONS (SCALE): "..W_WIDTH.." X "..W_HEIGHT.." ("..SCALE..")")
+    print("MOUSE_POS(X, Y): "..getPositionX..", "..getPositionY)
     print("---\n")
   end
 end
