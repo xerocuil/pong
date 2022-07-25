@@ -12,7 +12,7 @@ Player1Input = Controls.new {
     up = {'key:w', 'axis:lefty-', 'button:dpup'},
     down = {'key:s', 'axis:lefty+', 'button:dpdown'},
     start = {'key:return', 'button:start'},
-    oneplayer = {'key:1', 'button:a'},
+    select = {'key:1', 'button:a'},
     twoplayers = {'key:2', 'button:x'},
     exit = {'key:escape', 'button:back'},
     fullscreen = {'key:f11', 'button:y'}
@@ -32,6 +32,18 @@ Player2Input = Controls.new {
   deadzone = .33,
 }
 
+local Player1Menu = Controls.new {
+  controls = {
+    up = {'key:w', 'axis:lefty-', 'button:dpup'},
+    down = {'key:s', 'axis:lefty+', 'button:dpdown'},
+    oneplayer = {'key:1', 'button:a'},
+    twoplayers = {'key:2', 'button:x'},
+    exit = {'key:escape', 'button:back'},
+    fullscreen = {'key:f11', 'button:y'}
+  },
+  joystick = love.joystick.getJoysticks()[1],
+  deadzone = .33,
+}
 
 -- ## Init Game Table
 Game = {}
@@ -67,11 +79,13 @@ end
 function love.update(dt)
   Player1Input:update()
   Player2Input:update()
+
   exitGame()
   fullscreen(fullscreen)
   start()
 
   if Game.state == "game" then
+    
     Background:update(dt)
     Ball:update(dt)
     Player:updateAll(dt)
@@ -81,10 +95,12 @@ function love.update(dt)
     acquireTarget(dt)
     AIMovement(dt)
   elseif Game.state == "title" then
+    Menu:update()
     Background:update(dt)
-    oneplayer()
+    --oneplayer()
     twoplayers()
   elseif Game.state == "game_over" then
+    Menu:update()
     Background:update(dt)
   end
 end
@@ -196,6 +212,9 @@ function playerMove(dt)
   end
 end
 
+
+
+
 ---- Start
 function start()
   if Player1Input:pressed 'start' then
@@ -212,11 +231,11 @@ function start()
   end
 end
 
-function oneplayer()
-  if Player1Input:pressed 'oneplayer' then
-    start1p()
-  end
-end
+-- function oneplayer()
+--   if Player1Input:pressed 'oneplayer' then
+--     start1p()
+--   end
+-- end
 
 function twoplayers()
   if Player1Input:pressed 'twoplayers' then
@@ -377,6 +396,7 @@ end
 function printDebug()
   if DEBUG then
     loveversion = string.format("%02d.%02d.%02d", love._version_major, love._version_minor, love._version_revision)
+    local getPositionX, getPositionY = love.mouse.getPosition()
 
     print("\n\n## DEBUG (main.lua\n")
     print("### Game")
@@ -390,10 +410,13 @@ function printDebug()
     print(".name: "..Player2.name.."  .type: "..Player2.type.."  .color: "..Player2.color)
     print("---")
     print("### System")
-    print("LOVE Version: "..loveversion)
+    print("LÖVE Version: "..loveversion)
     print("SCALE: "..SCALE)
     print("W_WIDTH: "..W_WIDTH)
     print("W_HEIGHT: "..W_HEIGHT)
+    print("getPositionX: "..getPositionX)
+    print("getPositionY: "..getPositionY)
+    print("menu_selection: "..menu_selection)
     print("---\n")
   end
 end

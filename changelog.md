@@ -2,12 +2,12 @@
 
 ## To-Do
 
-- [ ] Menu
+- [x] Menu
 - [ ] Music
 - [ ] Update Graphics
 - [ ] Update Score format
 - [ ] Update font
-- [ ] Create State Class
+- [ ] Create State Classes
 - [ ] Optimize AI
 
 
