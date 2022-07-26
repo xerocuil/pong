@@ -1,22 +1,27 @@
--- ## Set Filter
+-- ## Global Variables
+
+--- Set Filter
 love.graphics.setDefaultFilter("nearest", "nearest")
 
-
--- ## Set Libraries
+--- Set Libraries
 Controls = require 'lib/baton'
+color = require 'lib/color'
 
+--- Show/Hide Mouse
 function hide_mouse() love.mouse.setVisible(false) end
 function show_mouse() love.mouse.setVisible(true) end
 
--- ## Load Player Controls
+
+
+-- Load Controls
 Player1Input = Controls.new {
   controls = {
     up = {'key:w', 'axis:lefty-', 'button:dpup'},
     down = {'key:s', 'axis:lefty+', 'button:dpdown'},
-    start = {'key:return', 'button:start'},
-    select = {'key:1', 'button:a'},
-    twoplayers = {'key:2', 'button:x'},
-    exit = {'key:escape', 'button:back'},
+    menu = {'key:escape', 'button:start'},
+    select = {'key:return', 'key:space', 'button:a'},
+    back = {'key:backspace', 'button:b', 'button:back'},
+    exit = {'key:f9'},
     fullscreen = {'key:f11', 'button:y'}
   },
   joystick = love.joystick.getJoysticks()[1],
@@ -27,23 +32,11 @@ Player2Input = Controls.new {
   controls = {
     up = {'key:up', 'axis:lefty-', 'button:dpup'},
     down = {'key:down', 'axis:lefty+', 'button:dpdown'},
-    twoplayers = {'button:x', 'button:start'},
-    exit = {'key:escape', 'button:back'},
+    menu = {'button:start'},
+    select = {'key:lctrl', 'button:a'},
+    back = {'button:b'}
   },
   joystick = love.joystick.getJoysticks()[2],
-  deadzone = .33,
-}
-
-local Player1Menu = Controls.new {
-  controls = {
-    up = {'key:w', 'axis:lefty-', 'button:dpup'},
-    down = {'key:s', 'axis:lefty+', 'button:dpdown'},
-    oneplayer = {'key:1', 'button:a'},
-    twoplayers = {'key:2', 'button:x'},
-    exit = {'key:escape', 'button:back'},
-    fullscreen = {'key:f11', 'button:y'}
-  },
-  joystick = love.joystick.getJoysticks()[1],
   deadzone = .33,
 }
 
@@ -63,7 +56,6 @@ local Ball = require 'ball'
 local Menu = require 'menu'
 local Player = require 'player'
 local Settings = require 'settings'
-local Debug = require 'debug'
 
 
 -- ## Load
@@ -81,13 +73,9 @@ end
 function love.update(dt)
   Player1Input:update()
   Player2Input:update()
-
-  exitGame()
-  fullscreen(fullscreen)
-  start()
+  globalControls()
 
   if Game.state == "game" then
-    
     Background:update(dt)
     Ball:update(dt)
     Player:updateAll(dt)
@@ -99,8 +87,6 @@ function love.update(dt)
   elseif Game.state == "title" then
     Menu:update()
     Background:update(dt)
-    --oneplayer()
-    twoplayers()
   elseif Game.state == "game_over" then
     Menu:update()
     Background:update(dt)
@@ -115,7 +101,7 @@ function love.draw()
     Background:draw()
     Menu:draw()
   elseif Game.state == "game" then
-    Background:draw() -- Draw background first to not cover up sprites.
+    Background:draw()
     Ball:draw()
     Player:drawAll()
     drawScore()
@@ -123,16 +109,18 @@ function love.draw()
     Background:draw()
     Ball:draw()
     Menu:pauseMenu()
+    Player:drawAll()
   elseif Game.state == "game_over" then
     Background:draw()
     Menu:gameOverScreen()
+    drawScore()
   end
 end
 
 
 -- ## Functions
 
---- Reset Game
+-- Reset Game
 function resetGame()
   --Game = {score = {player1 = 0, player2 = 0}, winner = "none"}
   Game.score.player1 = 0
@@ -146,9 +134,8 @@ function resetGame()
   Game.state = "game"
 end
 
-
---- ### Scoring
----- Check Score
+-- Scoring
+--- Check Score
 function checkScore()
   if Game.score.player1 == Settings.match_win then
     Game.winner = Player1.name
@@ -159,7 +146,7 @@ function checkScore()
   end
 end
 
----- Player Score
+--- Player Score
 function score()
   if Ball.x < 0 then
     resetBall(-1)
@@ -172,7 +159,14 @@ function score()
   end
 end
 
---- Reset
+--- Draw Scoreboard
+function drawScore()
+  love.graphics.setFont(font)
+  love.graphics.print(Player1.name..": "..Game.score.player1, 50, 50)
+  love.graphics.print(Player2.name..": "..Game.score.player2, love.graphics.getWidth() - 200, 50)
+end
+
+-- Reset Ball
 function resetBall(modifier)
   Ball.x = love.graphics.getWidth() / 2 - Ball.width / 2
   Ball.y = love.graphics.getHeight() / 2 - Ball.height / 2
@@ -181,17 +175,8 @@ function resetBall(modifier)
   Ball.xVel = Ball.speed * modifier
 end
 
----- Draw Scoreboard
-function drawScore()
-  love.graphics.setFont(font)
-  love.graphics.print(Player1.name..": "..Game.score.player1, 50, 50)
-  love.graphics.print(Player2.name..": "..Game.score.player2, love.graphics.getWidth() - 200, 50)
-end
-
-
---- ### Input
-
----- Player Movement
+-- Player Input
+--- Player Movement
 function playerMove(dt)
   if Player1.type == "human" then
     if Player1Input:down 'up' then
@@ -214,38 +199,43 @@ function playerMove(dt)
   end
 end
 
+--- Global Controls
+function globalControls()
 
-
-
----- Start
-function start()
-  if Player1Input:pressed 'start' then
+  ---- Menu
+  if Player1Input:pressed 'menu' or Player2Input:pressed 'menu' then
     if Game.state == "game" then
       Game.state = "paused"
     elseif Game.state == "paused" then
       Game.state = "game"
-    elseif Game.state == "title" then
-      resetGame()
-      start1p()
-    elseif Game.state == "game_over" then
-      resetGame()
     end
   end
-end
 
--- function oneplayer()
---   if Player1Input:pressed 'oneplayer' then
---     start1p()
---   end
--- end
+  if Player1Input:pressed 'back' or Player2Input:pressed 'back' then
+    if Game.state == "paused" or Game.state == "game_over" then
+      resetGame()
+      Game.state = "title"
+    end
+  end
 
-function twoplayers()
-  if Player1Input:pressed 'twoplayers' then
-    start2p()
+  ---- Fullscreen
+  if Player1Input:pressed 'fullscreen' then
+    if love.window.getFullscreen() then
+      love.window.setMode(W_WIDTH, W_HEIGHT)
+    else
+      love.window.setFullscreen(true, "exclusive")
+    end
+  end
+
+  ---- Exit
+  if Player1Input:pressed 'exit' then
+    love.event.quit()
   end
 end
 
----- 1P Start
+-- ## Game Modes
+
+-- 1P Start
 function start1p()
   resetGame()
   Game = {type = "1P", score = {player1 = 0, player2 = 0}, winner = "none"}
@@ -256,7 +246,7 @@ function start1p()
   Game.state = "game"
 end
 
----- 2P Start
+-- 2P Start
 function start2p()
   resetGame()
   Game = {type = "2P", score = {player1 = 0, player2 = 0}, winner = "none"}
@@ -265,50 +255,13 @@ function start2p()
   Player2.color = "blue"
   Player2.img = love.graphics.newImage("assets/paddles/"..Player2.color..".png")
   Game.state = "game"
-  
 end
 
----- Fullscreen
-function fullscreen()
-  if Player1Input:pressed 'fullscreen' then
-    if love.window.getFullscreen() then
-      love.window.setMode(W_WIDTH, W_HEIGHT)
-    else
-      love.window.setFullscreen(true, "exclusive")
-    end
-  end
-end
 
----- Exit
-function exitGame()
-  if Player1Input:pressed 'exit' or Player2Input:pressed 'exit'  then
-    if Game.state == "title" then
-      love.event.quit()
-    elseif Game.state == "paused" then
-      resetGame()
-      Game.state = "title"
-    elseif Game.state == "game" then
-      Game.state = "paused"
-    elseif Game.state == "game_over" then
-      Game.state = "title"
-    end
-  end
-end
+-- ## AI
 
---- ### AI Movement
-
----- Acquire Target
+-- Acquire Target
 function acquireTarget()
-  if Player1.type == "ai" then
-    if Ball.y + Ball.height < Player1.y then
-      Player1.yVel = -Player1.speed
-    elseif Ball.y > Player1.y + Player1.height then
-      Player1.yVel = Player1.speed
-    else
-      Player1.yVel = 0
-    end
-  end
-
   if Player2.type == "ai" then
     if Ball.y + Ball.height < Player2.y then
       Player2.yVel = -Player2.speed
@@ -319,14 +272,9 @@ function acquireTarget()
     end
   end
 end
----- AIMovement
+
+-- Movement
 function AIMovement(dt)
-  if Player1.type == "ai" then
-    if Player1.timer > Player1.rate then
-      Player1.timer = 0
-      acquireTarget()
-    end
-  end
   if Player2.type == "ai" then
     if Player2.timer > Player2.rate then
       Player2.timer = 0
@@ -335,9 +283,9 @@ function AIMovement(dt)
   end
 end
 
---- ### Collision Detection (Ball)
+-- ## Collision Detection (Ball)
 
----- Check Collision def
+-- Check Collision
 function checkCollision(a, b)
   if a.x + a.width > b.x and a.x < b.x + b.width and a.y + a.height > b.y and a.y < b.y + b.height then
     return true
@@ -346,7 +294,7 @@ function checkCollision(a, b)
   end
 end
 
----- Wall Collision
+-- Wall Collision
 function collideWall()
   if Ball.y < 0 then
     Ball.y = 0
@@ -359,7 +307,7 @@ function collideWall()
   end
 end
 
----- Player1 Collision
+-- Player 1 Collision
 function collidePlayer1()
   if checkCollision(Ball, Player1) then
     Ball.xVel = Ball.speed
@@ -372,7 +320,7 @@ function collidePlayer1()
   end
 end
 
----- Player2 Collision
+-- Player 2 Collision
 function collidePlayer2()
   if checkCollision(Ball, Player2) then
     Ball.xVel = -Ball.speed
@@ -385,7 +333,7 @@ function collidePlayer2()
   end
 end
 
----- Check All Collisions
+-- Check All Collisions
 function collideAll()
   collideWall()
   collidePlayer1()
@@ -401,10 +349,9 @@ function printDebug()
     local getPositionX, getPositionY = love.mouse.getPosition()
 
     print("\n## DEBUG (main.lua)\n")
-    print("### Menu")
-    print("menu_selection: "..menu_selection)
     print("---")
     print("### Game")
+    print("menu_selection: "..menu_selection)
     print("type: "..Game.type..", score.player1: "..Game.score.player1..", score.player2: "..Game.score.player2)
     print("---")
     print("### Player")
@@ -415,6 +362,9 @@ function printDebug()
     print("LÖVE Version: "..loveversion)
     print("DIMENSIONS (SCALE): "..W_WIDTH.." X "..W_HEIGHT.." ("..SCALE..")")
     print("MOUSE_POS(X, Y): "..getPositionX..", "..getPositionY)
+    print("FPS: "..love.timer.getFPS())
     print("---\n")
   end
 end
+
+
