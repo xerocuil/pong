@@ -9,12 +9,11 @@ Pong clone created with LÖVE/Lua.
 
 Command           | Keyboard                            | Joystick
 :------           | :-------                            | :-------
-Move Paddle       | 1P: `W` / `S`<br/>2P: `UP` / `DOWN` | `D-PAD` or `L STICK`
-1 Player Game     | `1`                                 | `A`
-2 Player Game     | `2`                                 | `X`
-Pause             | `ENTER`                             | `START`
+Move              | 1P: `W` / `S`<br/>2P: `UP` / `DOWN` | `D-PAD` or `L STICK`
+Menu Select       | `ENTER`                             | `A`
+Pause             | `ESC`                               | `START`
 Toggle Fullscreen | `F11`                               | `Y`
-Exit Match/Game   | `ESC`                               | `BACK`
+Quit Game         | `F9`                                | 
 
 
 ## Latest Release [v0.3.0]

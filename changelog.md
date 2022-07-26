@@ -9,6 +9,7 @@
 - [ ] Update font
 - [ ] Create State Classes
 - [ ] Optimize AI
+- [ ] Fix Game Over Controls
 
 ## [Unreleased]
 
@@ -20,6 +21,7 @@
 
 - Refactored code, file system
 - Consolidated global controls into single function
+- Converted sound effects to .ogg format
 
 ## [0.3.0] - 2022.0725
 
@@ -45,7 +47,7 @@
 
 - Pause screen
 - Scaling
-- Fullscreen toggle
+- Full-screen toggle
 - Reset game at game over screen
 - Game icon
 

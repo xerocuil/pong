@@ -6,7 +6,7 @@ function show_mouse() love.mouse.setVisible(true) end
 
 -- Variables
 love.graphics.setDefaultFilter("nearest", "nearest")
-colorPalette = require 'lib/color'
+palette = require 'engine.palette'
 font = love.graphics.newFont('assets/digital-disco-thin.ttf', 20 * SCALE)
 titleFont = love.graphics.newFont('assets/digital-disco.ttf', 64 * SCALE)
 

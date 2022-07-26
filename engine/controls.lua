@@ -1,4 +1,4 @@
-baton = require 'lib/baton'
+baton = require 'engine.lib.baton'
 
 -- Load baton
 Player1Input = baton.new {

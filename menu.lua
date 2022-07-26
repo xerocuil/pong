@@ -1,4 +1,4 @@
-Controls = require 'lib/baton'
+Controls = require 'engine.lib.baton'
 
 --## Init/Load Menu
 local Menu = {}
