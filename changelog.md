@@ -2,7 +2,6 @@
 
 ## To-Do
 
-- [x] Menu
 - [ ] Music
 - [ ] Update Graphics
 - [ ] Update Score format
@@ -10,12 +9,14 @@
 - [ ] Create State Classes
 - [ ] Optimize AI
 - [ ] Fix Game Over Controls
+- [ ] Fix debugger scores
 
 ## [Unreleased]
 
 ### Added
 
 - Color library
+- State.switch() function
 
 ### Changed
 
