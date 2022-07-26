@@ -1,15 +1,47 @@
-local Ball = require 'engine.ball'
+local Settings = require 'engine.settings'
+
+Ball = require 'engine.ball'
+Player = require 'engine.player'
+Collision = require 'engine.collision'
 
 -- ## Init Game Table
-Game = {}
-Game = {
-  state = "title",
+local Game = {}
+local Game = {
+  state = "menu",
   score = {player1 = 0, player2 = 0},
   winner = "none",
   type = "1P"
 }
 
+-- ## Load
+function Game:load()
+  Ball:load()
+  Player:load()
+end
 
+
+-- ## Update
+function Game:update(dt)
+  Ball:update(dt)
+  Player:updateAll(dt)
+  acquireTarget(dt)
+  AIMovement(dt)
+  playerMove(dt)
+  checkScore()
+  score()
+  collideAll()
+end
+
+
+-- ## Draw
+function Game:draw()
+  Ball:draw()
+  Player:drawAll()
+  drawScore()
+end
+
+
+-- ## Functions
 --- Player Movement
 function playerMove(dt)
   if Player1.type == "human" then
@@ -48,7 +80,7 @@ function resetGame()
   Player2.y = Player2.default_x
   Player2.y = Player2.default_y
   resetBall(1)
-  Game.state = "game"
+  State:switch("game")
 end
 
 -- Scoring
@@ -56,10 +88,10 @@ end
 function checkScore()
   if Game.score.player1 == Settings.match_win then
     Game.winner = Player1.name
-    Game.state = "game_over"
+    State:switch("game_over")
   elseif Game.score.player2 == Settings.match_win then
     Game.winner = Player2.name
-    Game.state = "game_over"
+    State:switch("game_over")
   end
 end
 
@@ -105,7 +137,7 @@ function start1p()
   Player2.name = "CPU"
   Player2.color = "green"
   Player2.img = love.graphics.newImage("assets/paddles/"..Player2.color..".png")
-  Game.state = "game"
+  State:switch("game")
 end
 
 -- 2P Start
@@ -116,7 +148,7 @@ function start2p()
   Player2.name = "Player 2"
   Player2.color = "blue"
   Player2.img = love.graphics.newImage("assets/paddles/"..Player2.color..".png")
-  Game.state = "game"
+  State:switch("game")
 end
 
 

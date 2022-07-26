@@ -8,16 +8,38 @@ function debugger()
   print("---")
   print("### Game")
   print("menu_selection: "..menu_selection)
-  print("type: "..Game.type..", score.player1: "..Game.score.player1..", score.player2: "..Game.score.player2)
+  print("Game.state: "..Game.state)
+  print("type: "..Game.type.."  score.player1: "..Game.score.player1.." score.player2: "..Game.score.player2)
   print("---")
-  print("### Player")
-  print("name: "..Player1.name..", type: "..Player1.type..", color: "..Player1.color)
-  print("name: "..Player2.name..", type: "..Player2.type..", color: "..Player2.color)
+  print("### Players")
+  print("name: "..Player1.name.."   type: "..Player1.type.."  color: "..Player1.color)
+  print("name: "..Player2.name.."   type: "..Player2.type.."  color: "..Player2.color)
   print("---")
   print("### System")
   print("LÖVE Version: "..loveversion)
   print("DIMENSIONS (SCALE): "..W_WIDTH.." X "..W_HEIGHT.." ("..SCALE..")")
-  print("MOUSE_POS(X, Y): "..getPositionX..", "..getPositionY)
+  print("MOUSE_POS(X,Y): "..getPositionX..","..getPositionY)
   print("FPS: "..love.timer.getFPS())
+  print("---")
+  print("### States")
+  for i,v in ipairs(State) do
+    if v.on then
+      print(v.name.."   on")
+    else
+      print(v.name)
+    end
+  end
   print("---\n")
 end
+
+timer_reset = 1
+timer = 0
+function displayDebugger(dt)
+  if timer <= 0 then
+    timer = timer_reset
+    debugger()
+  end
+  timer = timer - dt
+end
+
+  
