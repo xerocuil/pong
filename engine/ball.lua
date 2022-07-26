@@ -15,8 +15,8 @@ function Ball:load()
 	self.speed = self.default_speed
 	self.xVel = -self.speed
 	self.yVel = 0
-	self.hitWall = love.audio.newSource("sounds/hitWall.wav", "static")
-	self.hitPlayer = love.audio.newSource("sounds/hitPlayer.wav", "static")
+	self.hitWall = love.audio.newSource("sounds/hitWall.ogg", "static")
+	self.hitPlayer = love.audio.newSource("sounds/hitPlayer.ogg", "static")
 end
 
 
