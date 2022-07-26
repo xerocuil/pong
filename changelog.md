@@ -10,6 +10,16 @@
 - [ ] Create State Classes
 - [ ] Optimize AI
 
+## [Unreleased]
+
+### Added
+
+- Color library
+
+### Changed
+
+- Refactored code, file system
+- Consolidated global controls into single function
 
 ## [0.3.0] - 2022.0725
 
