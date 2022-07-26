@@ -1,5 +1,5 @@
 -- ## Load Settings
-local Settings = require 'settings'
+local Settings = require 'engine.settings'
 
 
 -- ## Init/Load Ball
