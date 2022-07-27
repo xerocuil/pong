@@ -1,3 +1,4 @@
+
 -- # Debugger
 
 function debugger()
@@ -14,6 +15,12 @@ function debugger()
   print("### Players")
   print("name: "..Player1.name.."   type: "..Player1.type.."  color: "..Player1.color)
   print("name: "..Player2.name.."   type: "..Player2.type.."  color: "..Player2.color)
+  print("---")
+  print("### Menu")
+  -- print("#### TitleScreenMenu")
+  -- for i,v in ipairs(TitleScreenMenu) do
+  --   print("text"..v.text.."   fn: "..v.fn.."    options:  "..v.options)
+  -- end
   print("---")
   print("### System")
   print("LÖVE Version: "..loveversion)
