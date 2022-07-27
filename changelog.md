@@ -6,7 +6,7 @@
 - [ ] Update Graphics
 - [ ] Update Score format
 - [ ] Update font
-- [ ] Create State Classes
+- [x] Create State Classes
 - [ ] Optimize AI
 - [ ] Fix Game Over Controls
 - [ ] Fix debugger scores
@@ -16,7 +16,7 @@
 ### Added
 
 - Color library
-- State.switch() function
+- State.switch function
 
 ### Changed
 

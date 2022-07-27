@@ -25,4 +25,5 @@ Quit Game         | `F9`                                |
 
 ---
 
-[Homepage](https://github.com/xerocuil/pong) | [Changelog](changelog.md)
+[Changelog](https://github.com/xerocuil/pong/blob/main/changelog.md)  
+[Baton Library](https://github.com/tesselode/baton)

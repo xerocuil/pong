@@ -19,7 +19,6 @@ function Game:load()
   Player:load()
 end
 
-
 -- ## Update
 function Game:update(dt)
   Ball:update(dt)
@@ -32,14 +31,12 @@ function Game:update(dt)
   collideAll()
 end
 
-
 -- ## Draw
 function Game:draw()
   Ball:draw()
   Player:drawAll()
   drawScore()
 end
-
 
 -- ## Functions
 --- Player Movement
@@ -64,9 +61,6 @@ function playerMove(dt)
     Player2.y = Player2.y + Player2.yVel * dt
   end
 end
-
-
-
 
 -- ## Functions
 
@@ -124,9 +118,6 @@ function resetBall(modifier)
   Ball.xVel = Ball.speed * modifier
 end
 
-
-
-
 -- ## Game Modes
 
 -- 1P Start
@@ -150,9 +141,6 @@ function start2p()
   Player2.img = love.graphics.newImage("assets/paddles/"..Player2.color..".png")
   State:switch("game")
 end
-
-
-
 
 -- ## AI
 
@@ -178,7 +166,5 @@ function AIMovement(dt)
     end
   end
 end
-
-
 
 return Game
