@@ -17,7 +17,7 @@ end
 love.graphics.setDefaultFilter("nearest", "nearest")
 palette = require 'engine.palette'
 font = love.graphics.newFont('assets/digital-disco-thin.ttf', 20 * SCALE)
-titleFont = love.graphics.newFont('assets/digital-disco.ttf', 64 * SCALE)
+titleFont = love.graphics.newFont('assets/cabin-bold.ttf', 64 * SCALE)
 
 btn_height = 64
 title_height = love.graphics.getHeight() * 0.1

@@ -17,11 +17,13 @@
 
 - Color library
 - State.switch function
+- Metatables => Control, Menu, State metatables
+- States => Game, GameOver, Options, Paused, TitleScreen
+- Debugger script
 
 ### Changed
 
 - Refactored code, file system
-- Consolidated global controls into single function
 - Converted sound effects to .ogg format
 
 ## [0.3.0] - 2022.0725
@@ -32,7 +34,7 @@
 
 ### Changed
 
-- Moved Player,AI classes to Player table
+- Moved Player,AI classes to Player metatable
 - Moved A.I, collision detection, player movement, scoring to main
 - Modified Menu, Debug GUI
 
